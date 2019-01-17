@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/vuev2.5.21.js"></script>
+</head>
+<body>
+    <!-- V层 -->
+    <div id="app">
+        <!-- 小胡子语法 -->
+        <!-- <p>{{msg}}我会拼接到小胡子语法后面</p> -->
+        <!-- 差值表达式与v-text="222"命令表达式同时写,会被命令表达式覆盖 -->
+        <!-- <p v-text="msg">{{msg}}hello</p>  -->
+        <!-- 命令文本表达式后面的内容会被覆盖,等同于 p.inner-text=msg  -->
+        <!-- <p v-text="msg">我会被覆盖</p>  -->
+        <!-- <p v-html="msg"><p>我会被html解析</p></p>  -->
+        <!-- 给input通过v-bind:  或者缩写: 绑定属性      同时v-on:click  或@click绑定事件 -->
+        <p>{{msg}}</p>
+        <!-- <input type="text"  V-bind:value="val" V-on:click="show">  -->
+        <input id="inp" type="text"  :value="msg" V-on:keyup="show"> 
+
+        <!-- 绑定属性机制:v-bind:   缩写:      绑定事件机制:v-on:clcik 缩写@clcik -->
+    </div>
+    <script>
+        let vm =new Vue({   //VM层  
+            el:"#app",
+            data:{          //M层 存储层
+                msg:"hello,world!",
+                val:"我是一个绑定的属性"
+            },
+            methods:{
+                show(){
+                    // console.log(document.querySelector("#inp").value);     
+                 this.msg=document.querySelector("#inp").value
+                }
+            }
+        })
+    
+    </script>
+
+</body>
+</html>

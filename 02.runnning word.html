@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+    <script src="./js/vuev2.5.21.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{msg}}</p>
+        <button @click="goo">走起来</button>
+        <button @click="stop">别跑</button>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: "我的貂蝉在哪里?",
+                timerId:null
+            },
+            methods: {
+                goo() {
+                    // this.stop()
+                this.timerId=setInterval(() => {
+                        var start = this.msg.substr(0, 1)
+                        var end = this.msg.substr(1)
+                        this.msg = end + start
+                    }, 200);
+                },
+                stop() {
+                   clearInterval(this.timerId)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
