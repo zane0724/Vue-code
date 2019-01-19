@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+        <script src="./js/vuev2.5.21.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <p>{{msg}}</p>
+            <input type="text" :value="msg" style=width:100%>
+            <hr>
+            <input type="text" v-model="msg" style="width:100%">
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    msg:"我是值,可以双向数据绑定,修改之后可以从M层到V层,还会从V层返回"
+                },
+                methods: {
+                    
+                },
+            })
+        </script>
+    </body>
+</html>
