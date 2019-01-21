@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+        <script src="./js/vuev2.5.21.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <my-com></my-com>
+        </div>
+        <template id="tmp">
+            <div>
+                <h1>"这是一个组件模板的id,上面的my-com是模板的名称,为了让组件模板简化,抽离出组件的id"</h1>
+            </div>
+        </template>
+        
+        <script>
+            // Vue.component("组件名称", {template:"创建的组件对象"})
+            //组件的创建:
+            // 组件的创建第一种方式:
+            //组件的创建
+            // var com1 =Vue.extend({
+            //     template:"<h1>vue.extended利用vue的拓展方法创建对象,而且我必须是根路径,否则需要加根路径<h1>"
+            // })
+            // //注册组件
+            // Vue.component("myCom", com1)
+            
+            // 组件的创建第二种方式:
+            // 简写:
+            // Vue.component("myCom", {template:"<h1>vue.extended利用vue的拓展方法创建对象,而且我必须是根路径,否则需要加根路径<h1>"})
+
+            //组件的创建第三种方式:
+            Vue.component("myCom", {template:"#tmp"})    //组件对象内为ID
+
+
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    msg:"没错,俺张翼德是也.没错,俺张翼德是也.没错,俺张翼德是也.没错,俺张翼德是也."
+                }
+            })
+        </script>
+    </body>
+</html>

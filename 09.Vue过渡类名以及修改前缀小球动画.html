@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+        <script src="./lib/js/vue-2.4.0.js"></script>
+        <style>
+            #ball{
+                width: 180px;
+                height: 180px;
+                border-radius: 50%;
+                background-color:hotpink;
+            }
+            .v-enter,
+            .v-leave-to{
+                opacity: 0;
+                transform: translateX(350px)
+            }
+            .v-enter-active,
+            .v-leave-active{
+                transition: all 0.5s ease;
+            }
+
+
+            .my-enter,
+            .my-leave-to{
+                opacity: 0;
+                transform: translateY(350px)
+            }
+            .my-enter-active,
+            .my-leave-active{
+                transition: all 0.5s ease;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <input type="button" value="Running" @click="flag=!flag">
+            <transition>
+                <!-- v-if="flag"  v-if和v-show都是用于控制元素的显示隐藏的, v-if如果表达式是false, 元素压根不会创建, 而v-show如果表达式结果是false, 元素也会创建只是把display设为了none -->
+                <div id="ball" v-if="flag"></div>   
+            </transition>
+
+            <hr>
+            <input type="button" value="go" @click="flag2=!flag2">
+            <transition name="my">
+                    <!-- v-if="flag"  v-if和v-show都是用于控制元素的显示隐藏的, v-if如果表达式是false, 元素压根不会创建, 而v-show如果表达式结果是false, 元素也会创建只是把display设为了none -->
+                    <div id="ball" v-if="flag2"></div>   
+            </transition>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    flag:false,
+                    flag2:false
+                },
+                methods: {
+                    
+                },
+            })
+        </script>
+    </body>
+</html>

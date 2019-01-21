@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+        <script src="./lib/js/vue-2.4.0.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <p>{{ msg | msgFilter("邪恶") }}</p>
+        </div>
+        <script>
+            //过滤器使用
+            //参数1为过滤器名称
+            //参数2为回调函数,回调函数中第一个参数是管道符传入的参数,第二个参数为需要替换成的数据也是就传参
+            Vue.filter("msgFilter",function (data,str){
+               return data.replace('helloworld',str)
+            })
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    msg:"helloworld,你好,明天!!!"
+                },
+                methods: {
+                    
+                },
+            })
+        </script>
+    </body>
+</html>
+
+
