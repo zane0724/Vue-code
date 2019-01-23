@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+        <script src="../js/vuev2.5.21.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <my-com></my-com>
+            <com></com>
+            <com1></com1>
+        </div>
+
+        <!-- 组件模板 -->
+        <template id="mbid">
+            <div>
+                <h1>创建的组件对象中的模板,给它一个id,让组件对象进行调用</h1>
+            </div>
+        </template>
+        <script>
+
+            //组件创建
+            let com =Vue.extend({
+                template:"<h1>这是一个vue.extended创建的组件对象</h1>"
+            })
+
+            //注册组件
+            Vue.component("myCom", com)
+
+            //创建组件简写第二种方式
+            Vue.component("com",{template:"<p>这是简写的方式创建的组件</p>"})
+
+
+            //组件创建的第三种简写方式
+            Vue.component("com1", {template:"#mbid"})    //第一个注册组件的名称,第二个参数是创建的组件对象,对象中模板给出模板id
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                },
+                methods: {
+                    
+                },
+                filters:{},     //私有过滤器
+                directives:{},  //私有指令
+                components:{},  //私有组件
+                // 生命周期函数
+                beforeCreate() {
+                    // 创建之前
+                },
+                created() {
+                    //创建之后
+                },
+                beforeMount() {
+                    //挂载之前
+                },
+                mounted() {
+                    //挂载之后
+                },
+                beforeUpdate() {
+                    //更改之前
+                },
+                updated() {
+                    //更改之后
+                },
+                beforeDestroy() {
+                    //销毁之前
+                },
+                destroyed() {
+                    //销毁会后
+                },
+            })
+        </script>
+    </body>
+</html>

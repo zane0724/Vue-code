@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+    <script src="./js/vuev2.5.21.js"></script>
+    <link rel="stylesheet" href="./lib/bootstrap/dist/css/bootstrap.min.css">
+    <style>
+        #inp{
+            margin: 0 auto;
+            width: 1000px;
+        }
+        li{
+            border:1px dashed #999;
+            padding: 5px;
+            line-height: 35px;
+            width: 100%;
+        }
+        li:hover{
+            background-color:deepskyblue;
+            transition: all 0.8s ease
+        }
+
+        /* 动画 */
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translate(0,80px)
+        }
+        .v-enter-active,
+        .v-leave-active,
+        .v-move{
+            transition: all 0.6s ease
+        }
+        
+        .v-leave-active{
+            position: absolute;
+        }
+        </style>
+
+</head>
+
+<body>
+    <div id="app">
+        <div id="inp">
+            <input type="button" value="ID:">
+            <input type="text" v-model="id">
+            <input type="button" value="Name">
+            <input type="text" v-model="name">
+            <input type="button" value="技能">
+            <input type="text" v-model="attack">
+            <input type="button" value="添加" @click="add">
+        </div>
+        <!-- <ul> -->
+            <transition-group appear tag="ul">
+
+                <li v-for="(item,index) in list" :key="item.id" @click="del(index)">
+                    {{item.id}}-------{{item.name}}--------{{item.attack}}
+                </li>
+
+            </transition-group>
+        <!-- </ul> -->
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                id: "",
+                name: "",
+                attack: "",
+                list: [
+                    { id: 1, name: "吕布", attack: "方天画戟" },
+                    { id: 2, name: "关羽", attack: "青龙偃月" },
+                    { id: 3, name: "秦琼", attack: "金锏" },
+                    { id: 4, name: "罗成", attack: "回马枪" }
+                ]
+            },
+            methods: {
+                add() {
+                    this.list.push({ id: this.id, name: this.name, attack: this.attack })
+                    this.id = this.name = this.attack = ""
+                },
+                del(index){
+                    this.list.splice(index,1)
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+    <script src="../lib/js/vuev2.5.21.js"></script>
+    <link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div id="app">
+        
+        <div class="panel panel-primary">
+              <div class="panel-heading text-center">
+                    <h3 class="panel-title center">品牌列表添加</h3>
+              </div>
+              <div class="panel-body form-inline">
+                    <label>
+                        ID:
+                            <input type="text" class="form-control" v-model="id">
+                    </label>
+                    <label>
+                        Name:
+                            <input type="text" class="form-control" v-model="name" @keyup.enter="add">
+                    </label>
+                    <input type="button" value="添加" class="btn btn-primary" @click="add()">
+              </div>
+        </div>
+        
+
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>ctime</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item,index) in list" :key="item.id">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.ctime}}</td>
+                    <td><a href="" @click.prevent="del(item.id)">删除</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                id: "",
+                name: "",
+                list: [
+                    { id: 1, name: "貂蝉", ctime: new Date() },
+                    { id: 2, name: "妲己", ctime: new Date() }
+                ]
+            },
+            methods: {
+                add(){
+                    this.list.push({id:this.id, name:this.name,ctime:new Date()})
+                    this.id=this.name=""
+                },
+                del(id){
+                    this.list.some((item,i)=>{
+                        if(item.id ==id){
+                            this.list.splice(i,1)
+                            return true
+                        }
+                    })
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

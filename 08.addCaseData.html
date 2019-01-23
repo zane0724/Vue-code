@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+    <script src="./js/vuev2.5.21.js"></script>
+    <script src="./lib/js/vue-resource-1.3.4.js"></script>
+    <script src="./lib/js/moment.min.js"></script>
+    <link rel="stylesheet" href="./lib/bootstrap/dist/css/bootstrap.min.css">
+    <style>
+        tbody>tr:hover{
+            background-color: hotpink;
+            transition: all 0.8s ease;
+        }
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translateY(80px)
+        }
+
+        .v-enter-active,
+        .v-leave-active,
+        .v-move{
+            transition: all 6s ease;
+        }
+
+        .v-leave-active{
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <h3 class="panel-title">添加品牌</h3>
+            </div>
+            <div class="panel-body form-inline">
+                <label>
+                    <!-- Id:
+                    <input type="text" class="form-control" v-model="id"> -->
+                </label>
+                <label>
+                    Name:
+                    <input type="text" class="form-control" v-model="name" @keyup.enter="addInfo">
+                </label>
+                <input type="text" value="添加" class="btn btn-primary" @click="addInfo()">
+               
+            </div>
+        </div>
+
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Ctime</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <transition-group apear tag="ul">
+                    <tr v-for="(item,index) in list" :key="item.id" @click="del(item.index)">
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.ctime |ctimeFilter}}</td>
+                        <td><a href="" @click.prevent="del(item.id)">删除</a></td>
+                    </tr>
+                </transition-group>  
+            </tbody>
+        </table>
+
+    </div>
+    <script>
+        // console.log(moment);
+        // 全局时间过滤器
+        Vue.filter("ctimeFilter", function (dateStr, patern = "YYYY-MM-DD HH:mm:ss") {
+            return moment(dateStr).format(patern)
+        })
+
+        //定义回车自动添加   f2对应键盘码为113 ,将f2绑定到所需要回车的焦点
+        // Vue.config.keyCodes.f2=113
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                id: "",
+                name: "",
+                list: [
+                    // { id: 1, name: "奔驰", ctime: new Date() },
+                    // { id: 2, name: "宝马", ctime: new Date() }
+                ]
+            },
+            methods: {
+                getAllProduct() {
+                    this.$http.get("http://vue.lovegf.cn:8899/api/getprodlist").then(result=> {
+                        // console.log(result);
+                        let productResult =result.body.message
+                       this.list=productResult.slice(productResult.length -50,productResult.length)
+                    })
+                },
+                //向数据库添加数据
+                addInfo() {
+                    if(!this.name.trim()) return alert("请输入产品名称")
+                    this.$http.post("http://vue.lovegf.cn:8899/api/addproduct", { name: this.name }, { emulateJSON: true })
+                    .then(result => {
+                        //   console.log(result);
+                        this.getAllProduct()
+                    })
+                },
+                del(id) {
+                    this.$http.get("http://vue.lovegf.cn:8899/api/delproduct/" +id).then(result=>{
+                        this.getAllProduct()
+                    })
+                },
+
+            },
+            created() {
+                this.getAllProduct()
+            }
+        })
+    </script>
+</body>
+
+</html>

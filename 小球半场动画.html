@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+    <script src="../js/vuev2.5.21.js"></script>
+    <style>
+        #ball{
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background-color: hotpink;
+            }
+        #ball2{
+                width: 50%;
+                height: 50%;
+                border-radius: 50%;
+                background-color: deepskyblue;
+            }
+        </style>
+</head>
+
+<body>
+    <div id="app">
+        <button type="button" @click="flag=!flag">Go!</button>
+
+        <!-- 可以在属性中声明 JavaScript 钩子 -->
+        <!-- <transition 
+        半场动画入场动画
+            v-on:before-enter="beforeEnter" 
+            v-on:enter="enter" 
+            v-on:after-enter="afterEnter"
+            v-on:enter-cancelled="enterCancelled" 
+        半场动画离场动画
+            v-on:before-leave="beforeLeave" 
+            v-on:leave="leave" 
+            v-on:after-leave="afterLeave"
+            v-on:leave-cancelled="leaveCancelled">
+        </transition> -->
+        <transition 
+        @before-enter="beforeEnter"
+        @enter="enter"
+        @after-enter="afterEnter">
+            <div id="ball" v-if="flag">
+                <div id="ball2"></div>
+            </div>
+        </transition>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                flag: false
+            },
+            methods: {
+                beforeEnter(el){   //半场动画入场之前设置默认样式
+                    el.style.tranform="translate(0,0)"
+                },
+                enter(el,done){  //入场动画正在进行的时候
+                    el.offsetWidth
+                    el.style.transform="translate(150px,450px)"
+                    el.style.transition="all .8s ease"
+                    done()
+                },
+                afterEnter(el){
+                    this.flag=!this.flag
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
