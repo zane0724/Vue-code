@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+        <script src="./js/vuev2.5.21.js"></script>
+    </head>
+    <body>
+        <div id="app">
+                <a href="" @click.prevent="flag=true">登录</a>
+                <a href="" @click.prevent="flag=!true">注册</a>
+            <login v-if="flag"></login>
+            <register v-else></register>
+           
+        </div>
+        <script>
+
+            //组件切换
+            //登录组件
+            Vue.component("login", {
+                template:"<h1>登录组件切换</h1>",
+                data(){
+                    return{
+
+                    }
+                },
+                methods: {
+                    
+                },
+            })
+
+            //注册组件
+            Vue.component("register", {
+                template:"<h1>注册组件切换</h1>",
+                data(){
+                    return{
+
+                    }
+                },
+                methods: {
+                    
+                },
+            })
+
+            //创建vue的实例对象
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    flag:true
+                }
+            })
+        </script>
+    </body>
+</html>

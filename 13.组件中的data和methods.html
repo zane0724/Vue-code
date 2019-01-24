@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+        <script src="./js/vuev2.5.21.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <mycom></mycom>
+        </div>
+        <script>
+            //创建并注册组件
+            Vue.component("mycom", {
+                template:"<h1>写这个组件,因为组件中的data是一个函数,它返回的是一个对象-------{{msg}}</h1>",
+                data(){
+                    return {
+                        msg:"这是组件中data定义的数据"
+                    }
+                }
+            })
+
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                },
+                methods: {
+                    
+                },
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+        <script src="./js/vuev2.5.21.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <!-- 引用子组件 -->
+            <com></com>  
+            <hr>
+            <!-- 如果让父组件向子组件传值,需要绑定子组件,并定义组件 -->
+            <com v-bind:parentmsg="msg"></com>
+        </div>
+        <script>
+
+            // 创建组件实例
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    msg:"我是创建实例中的父组件"
+                },
+                methods: {
+                    
+                },
+                //components绑定子组件
+                components:{
+                    data() {
+                        return {
+                            title:'123',
+                            content:"哈哈"
+                        }
+                    },
+                    methods: {
+                        
+                    },
+                    com:{
+                        template:"<h1>这是一个子组件-----{{parentmsg}}</h1>",
+                        props:['parentmsg']   //将父组件传过来的值在props数组中定义
+
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

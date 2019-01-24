@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+    <script src="./js/vuev2.5.21.js"></script>
+</head>
+    <style>
+
+        /* 给入场离场动画类样式 */
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translateX(145px)
+        }
+        
+        .v-enter-active,
+        .v-leave-active{
+            transition: all 0.5s ease
+        }
+    </style>
+
+<body>
+    <div id="app">
+        <!-- 组件切换可以通过vue内部提供的component占位符来展示对应的名称组件 -->
+        <!-- is属性可以指定要切换组件的组件名称 -->
+        <a href="" @click.prevent="comname='login'">登录</a>
+        <a href="" @click.prevent="comname='register'">注册</a>
+        <!-- 组件切换动画,将所需切换元素包裹.并给出样式 -->
+        <!-- 同单元素切换一样,组件切换动画内部给出了 mode属性,用来先出还是先进. mode="out-in"
+        而单元数切换平滑以及指定元素可以使用  appear  以及tag ="ul"等方式 -->
+        <transition mode="out-in">
+            <component :is="comname"></component>
+        </transition>
+    </div>
+    <script>
+        // 登录组件
+        Vue.component("login", {
+            template: "<h2>登录组件</h2>"
+        })
+
+        //注册组件
+        Vue.component("register", {
+            template: "<h2>注册组件</h2>"
+        })
+        //创建组件实例
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                comname: ""
+            }
+        })
+    </script>
+</body>
+
+</html>
