@@ -25,7 +25,7 @@
                 methods: {
                     
                 },
-                //components绑定子组件
+                //components 私有组件   
                 components:{
                     data() {
                         return {
@@ -36,7 +36,7 @@
                     methods: {
                         
                     },
-                    com:{
+                    com:{   //子组件
                         template:"<h1>这是一个子组件-----{{parentmsg}}</h1>",
                         props:['parentmsg']   //将父组件传过来的值在props数组中定义
 

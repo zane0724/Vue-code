@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+        <script src="./js/vuev2.5.21.js"></script>
+    </head>
+    <body>
+
+        <!-- 如何将父组件方法传给子组件 -->
+        <div id="app">
+            <!-- 调用私有组件 -->
+            <com1 @func="show"></com1>    
+        </div>
+
+        <template id="tmp1">
+            <div>
+                <h1>私有组件模板</h1>
+                <input type="button" value="点击子组件按钮让父组件的方法传给子组件" @click="myclick">
+            </div>
+        </template>
+        <script>
+            //定义组件模板
+            let com1 ={
+                template:"#tmp1",
+                //组件与实例中的data有区别,组件中的data必须是一个函数,返回一个对象
+                data() {
+                    return {
+                        kidson:{name:"小头儿子",age:6}
+                    }
+                },
+                methods: {
+                    myclick(){
+                      this.$emit('func',this.kidson)
+                    }    
+                }
+            }
+
+            //穿件组件的实例
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    datamsgfromkidson:null
+                },
+                methods: {
+                   show(data){
+                       this.datamsgfromkidson=data
+                   }
+                },
+                components:{
+                    com1:com1    //私有组件,前面属性名为组件名称,后面com1位私有组件模板名称
+                }
+            })
+        </script>
+    </body>
+</html>
