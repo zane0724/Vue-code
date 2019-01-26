@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+    <script src="./js/vuev2.5.21.js"></script>
+    <script src="./js/vue-router-3.0.1.js"></script>
+    <style>
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translate(0,200px)
+        }
+        .v-enter-active,
+        .v-leave-active{
+            transition: all 0.8s ease
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 利用vue-router中提供的元素router-link(路由指向)监听url路径的变化  默认为一个a标签-->
+        <router-link to="login">登录</router-link>
+        <router-link to="register">注册</router-link>
+        <!-- //设置动画效果 -->
+        <transition mode="out-in" appear>  
+            <!-- 路由占位符占位 监听页面展示, -->
+            <router-view></router-view>
+        </transition>
+
+    </div>
+    <script>
+        //创建登录组件模板
+        var login = {
+            template: "<h2>登录组件</h2>"
+        }
+        //创建登录注册模板
+        var register = {
+            template: "<h2>注册组件</h2>"
+        }
+        //创建路由组件
+        const router = new VueRouter({
+            routes: [
+                { path: '/', redirect: "login" },
+                { path: '/login', component: login },
+                { path: '/register', component: register }
+            ]
+        })
+
+        //创建vm组件对象的实例
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            router: router   //将路由对象规则挂载到vm实例对象中,监听url路径的变化.展示对应的页面上
+        })
+    </script>
+</body>
+
+</html>

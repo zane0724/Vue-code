@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+    <script src="./js/vuev2.5.21.js"></script>
+    <script src="./js/vue-router-3.0.1.js"></script>
+    <style>
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translate(0,300px)
+        }
+        .v-enter-active,
+        .v-leave-active{
+            transition: all 0.5s ease
+        }
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            padding: 5px;
+        }
+        li{
+            padding: 5px;
+            height: 60px;
+            width: 100%;
+            border: 1px dashed hotpink;     
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 通过路由组件vue-router提供的元素,渲染出a标签 -->
+        <router-link to="listPage">列表页</router-link>
+        <router-link to="detailPage">详情页</router-link>
+        <!-- 路由配置动画效果 -->
+        <transition mode="out-in" appear>
+            <!-- 路由组件占位符 -->
+            <router-view></router-view>
+        </transition>
+    </div>
+
+    <!-- 列表页模板 -->
+    <template id="tmp">
+        <div class="listComtainer">
+            <h1>这是列表页</h1>
+            <ul>
+                <!-- <li v-for="(item,index) in newlist" :key="item.id"> -->
+                    <!-- 点击循环项跳转至详情页 -->
+                    <!-- 其中属性绑定的作用:将to属性的值作为表达式来解析,在to属性的值中可以写js代码 -->
+                    <router-link 
+                        tag="li" 
+                        v-for="(item,index) in newlist" 
+                        :key="item.id" 
+                        :to="'detailPage?id='+ item.id">
+                        <h2>----标题:{{item.title}}----</h2>
+                        <h3>详情内容:{{item.comtent}}</h3>
+                    </router-link>
+                <!-- </li> -->
+            </ul>
+        </div>
+    </template>
+    <!-- 详情页模板 -->
+    <template id="tmp1">
+        <div class="detailComtainer">
+            <h1>这是详情页-----{{$route.query.id}}</h1>
+        </div>
+    </template>
+    <script>
+        //列表页模板
+        let listpagecomponent = {
+            template: "#tmp",
+            data() {
+                return {
+                    newlist:[
+                        {id:1,title:"春天到了",comtent:"年年岁岁花相似,岁岁年年人不同"},
+                        {id:2,title:"春天到了",comtent:"年年岁岁花相似,岁岁年年人不同"},
+                        {id:3,title:"春天到了",comtent:"年年岁岁花相似,岁岁年年人不同"},
+                        {id:4,title:"春天到了",comtent:"年年岁岁花相似,岁岁年年人不同"},
+                        {id:5,title:"春天到了",comtent:"年年岁岁花相似,岁岁年年人不同"},
+                        {id:6,title:"春天到了",comtent:"年年岁岁花相似,岁岁年年人不同"},
+                        {id:7,title:"春天到了",comtent:"年年岁岁花相似,岁岁年年人不同"},
+                        {id:8,title:"春天到了",comtent:"年年岁岁花相似,岁岁年年人不同"},
+                        {id:9,title:"春天到了",comtent:"年年岁岁花相似,岁岁年年人不同"}
+                    ]
+                }
+            },
+        }
+        //详情页模板
+        let detailpagecomponent = {
+            template: "#tmp1"
+        }
+        //创建路由组件对象
+        const router = new VueRouter({
+            routes: [   //路由对象通过路由匹配规则监听对应的链接地址
+              {path:"/",redirect:"/listPage"},
+              {path:"/listPage",component:listpagecomponent},
+              {path:"/detailPage",component:detailpagecomponent},    
+            ]
+        })
+        //创建vue组件的实例对象
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            router: router   //将路由注册到vm实例上
+        })
+    </script>
+</body>
+
+</html>

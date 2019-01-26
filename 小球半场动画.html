@@ -5,7 +5,7 @@
     <title></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
-    <script src="../js/vuev2.5.21.js"></script>
+    <script src="./js/vuev2.5.21.js"></script>
     <style>
         #ball{
                 width: 50px;
@@ -19,7 +19,7 @@
                 border-radius: 50%;
                 background-color: deepskyblue;
             }
-        </style>
+    </style>
 </head>
 
 <body>
@@ -27,7 +27,7 @@
         <button type="button" @click="flag=!flag">Go!</button>
 
         <!-- 可以在属性中声明 JavaScript 钩子 -->
-        <!-- <transition 
+        <!-- <transition>
         半场动画入场动画
             v-on:before-enter="beforeEnter" 
             v-on:enter="enter" 
@@ -39,10 +39,10 @@
             v-on:after-leave="afterLeave"
             v-on:leave-cancelled="leaveCancelled">
         </transition> -->
-        <transition 
-        @before-enter="beforeEnter"
-        @enter="enter"
-        @after-enter="afterEnter">
+        <transition
+            @before-enter="beforeEnter"
+            @enter="enter"
+            @after-enter="afterEnter">
             <div id="ball" v-if="flag">
                 <div id="ball2"></div>
             </div>
@@ -56,18 +56,18 @@
             },
             methods: {
                 beforeEnter(el){   //半场动画入场之前设置默认样式
-                    el.style.tranform="translate(0,0)"
+                    el.style.transform="translate(0,0)"
                 },
-                enter(el,done){  //入场动画正在进行的时候
+                enter(el){  //入场动画正在进行的时候
                     el.offsetWidth
                     el.style.transform="translate(150px,450px)"
                     el.style.transition="all .8s ease"
-                    done()
+                    // done()
                 },
                 afterEnter(el){
                     this.flag=!this.flag
                 }
-            },
+            }
         })
     </script>
 </body>

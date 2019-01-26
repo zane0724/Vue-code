@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+    <script src="./js/vuev2.5.21.js"></script>
+    <script src="./js/vue-router-3.0.1.js"></script>
+    <style>
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translate(0,300px)
+        }
+        .v-enter-active,
+        .v-leave-active{
+            transition: all 0.5s ease
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 通过路由组件vue-router提供的元素,渲染出a标签 -->
+        <router-link to="login?id=10$name=zane">登录</router-link>
+        <router-link to="register">注册</router-link>
+        <!-- 路由配置动画效果 -->
+        <transition mode="out-in" appear>
+            <!-- 路由组件占位符 -->
+            <router-view></router-view>
+        </transition>
+    </div>
+    <script>
+        //创建路由模板组件
+        let login = {
+            template: "<h1>登录模板组件------{{$route.query.id}}</h1>",
+            
+            created() {
+                console.log(this.$route.query.id)
+            },
+        }
+        let register = {
+            template: "<h1>注册模板组件</h1>"
+        }
+        //创建路由组件对象
+        const router = new VueRouter({
+            routes: [   //路由对象通过路由匹配规则监听对应的链接地址
+                { path: "/", redirect: "login" },
+                { path: "/login", component: login },
+                { path: "/register", component: register }
+            ]
+        })
+        //创建vue组件的实例对象
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            router: router   //将路由注册到vm实例上
+        })
+    </script>
+</body>
+
+</html>
