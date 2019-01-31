@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+        <script src="./lib/js/vue-2.4.0.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <!-- 使用差值表达式调用组件中的数据 点击按钮实现vue中方法调用-->
+            <p @click="show">{{msg}}</p>
+            <com></com>
+        </div>
+        <script>
+            // 创建组件(组件名称,组件对象)
+            Vue.component("com", {
+                template:"<h1>创建基本组件</h1>"
+            })
+
+            // 定义一个组件对象
+            var item ={
+                template:"<div>这是一个组件模板,赋值给item接收</div>"
+            }
+            
+            //创建vue组件的实例
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                  msg:"宝剑锋从磨砺出"  
+                },
+                methods: {
+                    show(){
+                        alert("梅花香自苦寒来")
+                    }
+                },
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+        <script src="./js/vuev2.5.21.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <!-- 利用mustache语法 以及随机数拼接,调用vm实例函数对象中的数据 -->
+            <p>{{msg}}</p>
+            <div>{{msg + Math.random()}}</div>
+            <h2 v-text="msg + Math.random()"></h2>
+            <h3 v-html="msg + Math.random()"></h3>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    msg:"this is data message!"
+                }
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+        <script src="./js/vuev2.5.21.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            不加key情况如下:
+            <br>
+            用户名: <input v-if="flag"/>
+            邮箱: <input v-else-if />
+            <hr>
+            加key的情况:
+            <br>
+            用户名: <input v-if="flag" key="username"/>
+            邮箱: <input v-else-if key="useremail"/>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    flag:true
+                },
+                methods: {
+                    change(){
+                        setTimeout(()=>{
+                            this.flag =false
+                        },2000)
+                    }
+                },
+                mounted() {
+                    this.change()
+                },
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+        <script src="./js/vuev2.5.21.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            {{full}}
+            <div>{{msg}}</div>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    first:"张",
+                    last:"翼德",
+                    msg:"hello,world!"
+                },
+                computed: {
+                    full(){
+                        return this.first + this.last
+                    }
+                },
+                methods: {
+                    change(){
+                        setTimeout(()=>{
+                            this.msg="2s改变msg的值"
+                        },2000)
+                    }
+                },
+                //将方法挂载到函数实例中
+                mounted() {
+                    this.change()
+                },
+            })
+        </script>
+    </body>
+</html>

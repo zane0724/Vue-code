@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+        <script src="./js/vuev2.5.21.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div v-if="flag">{{msg}}</div>
+            <div v-else>你好,我使用if-else语法对元素进行创建,隐藏</div>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    flag:true,
+                    msg:"hello world"
+                },
+                methods: {
+                    isshow(){
+                        setTimeout(()=>{
+                            this.flag =false
+                        },2000)
+                    }
+                },
+                mounted() {
+                    this.isshow()
+                },
+            })
+        </script>
+    </body>
+</html>

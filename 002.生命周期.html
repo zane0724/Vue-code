@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+        <script src="./js/vuev2.5.21.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script>
+            // vue实例对象
+            var vm = new Vue({
+                el: '#app',
+                template:"<p>{{this.msg}}</p>",
+                data: {
+                    msg:"js基础最重要,是吧.world!",
+                    msg1:"Change my world!"
+                },
+                beforeCreate() {
+                    // Vm实例对象函数创建之前
+                    console.log("beforeCreate")
+                },
+                created() {
+                    // Vm实例对象函数创建完成后
+                    console.log("created")
+                    console.log(this.$el)
+                },
+                beforeMount() {
+                    //Vm实例对象函数挂载之前
+                    console.log("beforeMounted")
+                },
+                mounted() {
+                    // Vm实例对象函数挂载后
+                    console.log("mounted")
+                    console.log(this.$el)
+                    this.msg=this.msg1
+                },
+                beforeUpdate() {
+                    // Vm实例对象函数更改之前
+                    console.log("beforeUpdate")
+                },
+                updated() {
+                    // Vm实例对象函数更改之后
+                    console.log("updated")
+                },
+                beforeDestroy() {
+                    //Vm实例对象函数销毁之前
+                    console.log("beforeDestroy")
+                },
+                destroyed() {
+                    // Vm实例对象函数销毁
+                    console.log("destroyed")
+                },
+            })
+        </script>
+    </body>
+</html>
