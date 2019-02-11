@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+        <script src="./js/vuev2.5.21.js"></script>
+        <style>
+            .ball{
+                width: 50px;
+                height: 50px;
+                background-color: pink;
+                border-radius: 50%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <button type="button" @click="flag=!flag">球球动起来</button>
+            <transition 
+                @before-enter="beforeEnter"
+                @enter="enter"
+                @after-enter="afterEnter"
+            }>
+                <div class="ball" v-if="flag"></div>                
+            </transition>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    flag:false
+                },
+                methods: {
+                    beforeEnter(el) {
+                        el.style.transform="translate(0,0)"
+                    },
+                    enter(el,done){
+                        el.offsetWidth
+                        el.style.transform="translate(150px,500px)"
+                        el.style.transition="all .5s ease"
+                        done()
+                    },
+                    afterEnter(el){
+                        this.flag=!this.flag
+                    }
+                },
+            })
+        </script>
+    </body>
+</html>

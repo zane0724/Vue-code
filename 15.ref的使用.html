@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+        <script src="./js/vuev2.5.21.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h2> ref 的使用,如果是一个dom元素,使用$refs获取到的是dom元素</h2>
+            <div @click="getcount" ref="hello">hello world</div>
+        </div>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                },
+                methods: {
+                    getcount(){
+                    alert(this.$refs.hello.innerHTML)
+                    }
+                },
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0">
+        <script src="./js/vuev2.5.21.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h2>父组件向子组件传值通过v-bind绑定,传递的是数据类型</h2>
+            <item2 :conter="0"> </item2>
+            <item2 :conter="1"> </item2>
+        </div>
+        <script>
+            //定义一个子组件
+            const item ={
+                //在子组件中通过props定义一下conter
+                props:['conter'],
+                data(){
+                    return{
+                        num:this.conter
+                    }
+                },
+                template:"<div @click='addData'>{{num}}</div>",
+                created() {
+                    console.log(typeof(this.conter))
+                    console.log(this.num)
+                },
+                methods: {
+                    addData(){
+                        console.log(this.num);
+                        this.num++
+                    }
+                },
+            }
+            var vm = new Vue({
+                el: '#app',
+                data: {
+
+                },
+                components:{
+                    //挂载组件
+                    item2:item
+                }
+            })
+        </script>
+    </body>
+</html>
